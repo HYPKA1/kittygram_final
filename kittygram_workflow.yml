@@ -2,12 +2,12 @@ name: Kittygram workflow
 
 on:
   push:
-    branches:
-      - main
 
 jobs:
   tests:
     runs-on: ubuntu-latest
+    env:
+      SECRET_KEY: django-ci-test-key-not-for-production
 
     services:
       postgres:
@@ -154,6 +154,7 @@ jobs:
           tags: hypka/kittygram_gateway:latest
 
   deploy:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     needs:
       - build_and_push_to_docker_hub
