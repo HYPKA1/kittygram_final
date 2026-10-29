@@ -6,8 +6,6 @@ on:
 jobs:
   tests:
     runs-on: ubuntu-latest
-    env:
-      SECRET_KEY: django-ci-test-key-not-for-production
 
     services:
       postgres:
@@ -25,6 +23,7 @@ jobs:
           --health-retries 5
 
     env:
+      SECRET_KEY: django-ci-test-key-not-for-production
       POSTGRES_DB: kittygram
       POSTGRES_USER: kittygram_user
       POSTGRES_PASSWORD: test_password
